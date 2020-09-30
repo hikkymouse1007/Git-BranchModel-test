@@ -13,6 +13,11 @@ https://qiita.com/y-okudera/items/0b57830d2f56d1d51692
 
 ## メモ
 - git stashコマンド
+
+```
+git stash
+```
+
 作業ブランチを間違えた時や進行中の未コミットの内容を避難したいときに使う
 https://qiita.com/muran001/items/f5746c518bf663f86a79
 ```
@@ -35,12 +40,11 @@ Untracked files:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 
-# トラック対象ファイルをstashする
+// トラック対象ファイルをstashする
 git stash                                                                                                                                                   
 Saved working directory and index state WIP on #MD_TWEET-82: 9dd7787 [WIP]Middlewareによるレスポンスヘッダの検証
 
-# untracked fileもstashする
-
+// untracked fileもstashする
 $ git stash -u                                                                                                                                                 
 Saved working directory and index state WIP on #MD_TWEET-82: 9dd7787 [WIP]Middlewareによるレスポンスヘッダの検証
 
@@ -48,7 +52,7 @@ $ git stash list                                                                
 stash@{0}: WIP on #MD_TWEET-82: 9dd7787 [WIP]Middlewareによるレスポンスヘッダの検証
 stash@{1}: WIP on #MD_TWEET-82: 9dd7787 [WIP]Middlewareによるレスポンスヘッダの検証
 
-# 最新のstashを反映
+// 最新のstashを反映
 $ git stash apply                                                                                                                                                 
 Already up to date!
 On branch feature/guzzle_dev
@@ -58,10 +62,30 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 
-# 特定のstashを反映
+// 特定のstashを反映
 $ git stash apply stash@{0}                                                                                                                                      
 app/Http/Middleware/ApiThrottleRequests.php already exists, no checkout
 error: could not restore untracked files from stash
+
+```
+
+- git configコマンド
+AutherとCommiterの名前を変更する
+
+```
+// 名前の確認
+git config --local --list       
+
+// 変更
+$ git config --local user.name 名前
+$ git config --local user.email 名前@example.com
+
+//過去のコミットで変更する場合
+git rebase -i 25ddf087cfe17f7f71c1fd273eed931b39c71a4b
+
+git commit --amend --author="名前<名前@example.com>"
+
+git rebase --continue
 
 ```
 
